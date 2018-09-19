@@ -29964,7 +29964,7 @@ $packages["github.com/divan/whisper-gopherjs"] = (function() {
 	rand$1 = $packages["math/rand"];
 	strconv = $packages["strconv"];
 	sliceType = $sliceType($Uint8);
-	funcType = $funcType([$String, $String], [$String, $error], false);
+	funcType = $funcType([$String, $String], [$String, $String], false);
 	funcType$1 = $funcType([$String], [$String], false);
 	mapType = $mapType($String, $emptyInterface);
 	Key = function(password) {
@@ -29981,37 +29981,49 @@ $packages["github.com/divan/whisper-gopherjs"] = (function() {
 		$module.exports.Key = $externalize(Key, funcType$1);
 	};
 	EncryptSymmetric = function(key, msg) {
-		var _r, _r$1, _r$2, _tuple, _tuple$1, _tuple$2, aesgcm, block, encrypted, err, key, msg, raw, salt, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; aesgcm = $f.aesgcm; block = $f.block; encrypted = $f.encrypted; err = $f.err; key = $f.key; msg = $f.msg; raw = $f.raw; salt = $f.salt; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		if (!validateDataIntegrity((new sliceType($stringToBytes(key))), 32)) {
-			$s = -1; return ["", errors.New("invalid key provided for symmetric encryption, size: " + strconv.Itoa(key.length))];
-		}
+		var _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _tuple, _tuple$1, _tuple$2, aesgcm, block, encrypted, err, key, msg, raw, salt, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _r$3 = $f._r$3; _r$4 = $f._r$4; _r$5 = $f._r$5; _r$6 = $f._r$6; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; aesgcm = $f.aesgcm; block = $f.block; encrypted = $f.encrypted; err = $f.err; key = $f.key; msg = $f.msg; raw = $f.raw; salt = $f.salt; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		/* */ if (!validateDataIntegrity((new sliceType($stringToBytes(key))), 32)) { $s = 1; continue; }
+		/* */ $s = 2; continue;
+		/* if (!validateDataIntegrity((new sliceType($stringToBytes(key))), 32)) { */ case 1:
+			_r = errors.New("invalid key provided for symmetric encryption, size: " + strconv.Itoa(key.length)).Error(); /* */ $s = 3; case 3: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+			$s = -1; return ["", _r];
+		/* } */ case 2:
 		_tuple = aes.NewCipher((new sliceType($stringToBytes(key))));
 		block = _tuple[0];
 		err = _tuple[1];
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return ["", err];
-		}
-		_r = cipher.NewGCM(block); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		_tuple$1 = _r;
+		/* */ if (!($interfaceIsEqual(err, $ifaceNil))) { $s = 4; continue; }
+		/* */ $s = 5; continue;
+		/* if (!($interfaceIsEqual(err, $ifaceNil))) { */ case 4:
+			_r$1 = err.Error(); /* */ $s = 6; case 6: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+			$s = -1; return ["", _r$1];
+		/* } */ case 5:
+		_r$2 = cipher.NewGCM(block); /* */ $s = 7; case 7: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
+		_tuple$1 = _r$2;
 		aesgcm = _tuple$1[0];
 		err = _tuple$1[1];
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return ["", err];
-		}
-		_r$1 = generateSecureRandomData(12); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
-		_tuple$2 = _r$1;
+		/* */ if (!($interfaceIsEqual(err, $ifaceNil))) { $s = 8; continue; }
+		/* */ $s = 9; continue;
+		/* if (!($interfaceIsEqual(err, $ifaceNil))) { */ case 8:
+			_r$3 = err.Error(); /* */ $s = 10; case 10: if($c) { $c = false; _r$3 = _r$3.$blk(); } if (_r$3 && _r$3.$blk !== undefined) { break s; }
+			$s = -1; return ["", _r$3];
+		/* } */ case 9:
+		_r$4 = generateSecureRandomData(12); /* */ $s = 11; case 11: if($c) { $c = false; _r$4 = _r$4.$blk(); } if (_r$4 && _r$4.$blk !== undefined) { break s; }
+		_tuple$2 = _r$4;
 		salt = _tuple$2[0];
 		err = _tuple$2[1];
-		if (!($interfaceIsEqual(err, $ifaceNil))) {
-			$s = -1; return ["", err];
-		}
+		/* */ if (!($interfaceIsEqual(err, $ifaceNil))) { $s = 12; continue; }
+		/* */ $s = 13; continue;
+		/* if (!($interfaceIsEqual(err, $ifaceNil))) { */ case 12:
+			_r$5 = err.Error(); /* */ $s = 14; case 14: if($c) { $c = false; _r$5 = _r$5.$blk(); } if (_r$5 && _r$5.$blk !== undefined) { break s; }
+			$s = -1; return ["", _r$5];
+		/* } */ case 13:
 		raw = sliceType.nil;
-		_r$2 = aesgcm.Seal(sliceType.nil, salt, (new sliceType($stringToBytes(msg))), sliceType.nil); /* */ $s = 3; case 3: if($c) { $c = false; _r$2 = _r$2.$blk(); } if (_r$2 && _r$2.$blk !== undefined) { break s; }
-		encrypted = _r$2;
+		_r$6 = aesgcm.Seal(sliceType.nil, salt, (new sliceType($stringToBytes(msg))), sliceType.nil); /* */ $s = 15; case 15: if($c) { $c = false; _r$6 = _r$6.$blk(); } if (_r$6 && _r$6.$blk !== undefined) { break s; }
+		encrypted = _r$6;
 		raw = $appendSlice(encrypted, salt);
-		$s = -1; return [hex.EncodeToString(raw), $ifaceNil];
-		/* */ } return; } if ($f === undefined) { $f = { $blk: EncryptSymmetric }; } $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f.aesgcm = aesgcm; $f.block = block; $f.encrypted = encrypted; $f.err = err; $f.key = key; $f.msg = msg; $f.raw = raw; $f.salt = salt; $f.$s = $s; $f.$r = $r; return $f;
+		$s = -1; return [hex.EncodeToString(raw), ""];
+		/* */ } return; } if ($f === undefined) { $f = { $blk: EncryptSymmetric }; } $f._r = _r; $f._r$1 = _r$1; $f._r$2 = _r$2; $f._r$3 = _r$3; $f._r$4 = _r$4; $f._r$5 = _r$5; $f._r$6 = _r$6; $f._tuple = _tuple; $f._tuple$1 = _tuple$1; $f._tuple$2 = _tuple$2; $f.aesgcm = aesgcm; $f.block = block; $f.encrypted = encrypted; $f.err = err; $f.key = key; $f.msg = msg; $f.raw = raw; $f.salt = salt; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.EncryptSymmetric = EncryptSymmetric;
 	validateDataIntegrity = function(k, expectedSize) {

@@ -18,28 +18,28 @@ const (
 
 // EncryptSymmetric encrypts a message with a topic key, using AES-GCM-256.
 // nonce size should be 12 bytes (see cipher.gcmStandardNonceSize).
-func EncryptSymmetric(key string, msg string) (string, error) {
+func EncryptSymmetric(key string, msg string) (string, string) {
 	if !validateDataIntegrity([]byte(key), aesKeyLength) {
-		return "", errors.New("invalid key provided for symmetric encryption, size: " + strconv.Itoa(len(key)))
+		return "", errors.New("invalid key provided for symmetric encryption, size: " + strconv.Itoa(len(key))).Error()
 	}
 	block, err := aes.NewCipher([]byte(key))
 	if err != nil {
-		return "", err
+		return "", err.Error()
 	}
 	aesgcm, err := cipher.NewGCM(block)
 	if err != nil {
-		return "", err
+		return "", err.Error()
 	}
 	salt, err := generateSecureRandomData(aesNonceLength) // never use more than 2^32 random nonces with a given key
 	if err != nil {
-		return "", err
+		return "", err.Error()
 	}
 
 	var raw []byte
 	encrypted := aesgcm.Seal(nil, salt, []byte(msg), nil)
 	raw = append(encrypted, salt...)
 
-	return hex.EncodeToString(raw), nil
+	return hex.EncodeToString(raw), ""
 }
 
 // validateDataIntegrity returns false if the data have the wrong or contains all zeros,
