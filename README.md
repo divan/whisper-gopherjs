@@ -11,4 +11,12 @@ The output will be `whisper-gopherjs.js` and `whisper-gopherjs.js.map` files. In
 
 # Example
 
-TBD
+```
+$ node
+> const whisper = require('./whisper-gopherjs.js')
+> undefined
+> whisper
+> { EncryptSymmetric: [Function], Key: [Function] }
+> whisper.Key("password")
+> '���\r\u0019\u0015�l �<\\&�en�qA�g��\t�_W\u001c��\u0018$'
+```

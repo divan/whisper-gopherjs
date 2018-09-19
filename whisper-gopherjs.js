@@ -29952,7 +29952,7 @@ $packages["golang.org/x/crypto/pbkdf2"] = (function() {
 	return $pkg;
 })();
 $packages["github.com/divan/whisper-gopherjs"] = (function() {
-	var $pkg = {}, $init, aes, cipher, rand, sha256, hex, errors, js, pbkdf2, rand$1, strconv, sliceType, funcType, funcType$1, mapType, Key, main, EncryptSymmetric, validateDataIntegrity, containsOnlyZeros, generateSecureRandomData;
+	var $pkg = {}, $init, aes, cipher, rand, sha256, hex, errors, js, pbkdf2, rand$1, strconv, sliceType, funcType, funcType$1, Key, main, EncryptSymmetric, validateDataIntegrity, containsOnlyZeros, generateSecureRandomData;
 	aes = $packages["crypto/aes"];
 	cipher = $packages["crypto/cipher"];
 	rand = $packages["crypto/rand"];
@@ -29964,27 +29964,27 @@ $packages["github.com/divan/whisper-gopherjs"] = (function() {
 	rand$1 = $packages["math/rand"];
 	strconv = $packages["strconv"];
 	sliceType = $sliceType($Uint8);
-	funcType = $funcType([sliceType, $String], [$String, $error], false);
-	funcType$1 = $funcType([sliceType], [sliceType], false);
-	mapType = $mapType($String, $emptyInterface);
+	funcType = $funcType([$String, $String], [$String, $error], false);
+	funcType$1 = $funcType([$String], [$String], false);
 	Key = function(password) {
 		var _r, password, $s, $r;
 		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; password = $f.password; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = pbkdf2.Key(password, sliceType.nil, 65356, 32, sha256.New); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
-		$s = -1; return _r;
+		_r = pbkdf2.Key((new sliceType($stringToBytes(password))), sliceType.nil, 65356, 32, sha256.New); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		$s = -1; return ($bytesToString(_r));
 		/* */ } return; } if ($f === undefined) { $f = { $blk: Key }; } $f._r = _r; $f.password = password; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Key = Key;
 	main = function() {
-		$global.WhisperGo = $externalize($makeMap($String.keyFor, [{ k: "EncryptSymmetric", v: new funcType(EncryptSymmetric) }, { k: "Key", v: new funcType$1(Key) }]), mapType);
+		$module.exports.EncryptSymmetric = $externalize(EncryptSymmetric, funcType);
+		$module.exports.Key = $externalize(Key, funcType$1);
 	};
 	EncryptSymmetric = function(key, msg) {
 		var _r, _r$1, _r$2, _tuple, _tuple$1, _tuple$2, aesgcm, block, encrypted, err, key, msg, raw, salt, $s, $r;
 		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; _r$1 = $f._r$1; _r$2 = $f._r$2; _tuple = $f._tuple; _tuple$1 = $f._tuple$1; _tuple$2 = $f._tuple$2; aesgcm = $f.aesgcm; block = $f.block; encrypted = $f.encrypted; err = $f.err; key = $f.key; msg = $f.msg; raw = $f.raw; salt = $f.salt; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		if (!validateDataIntegrity(key, 32)) {
-			$s = -1; return ["", errors.New("invalid key provided for symmetric encryption, size: " + strconv.Itoa(key.$length))];
+		if (!validateDataIntegrity((new sliceType($stringToBytes(key))), 32)) {
+			$s = -1; return ["", errors.New("invalid key provided for symmetric encryption, size: " + strconv.Itoa(key.length))];
 		}
-		_tuple = aes.NewCipher(key);
+		_tuple = aes.NewCipher((new sliceType($stringToBytes(key))));
 		block = _tuple[0];
 		err = _tuple[1];
 		if (!($interfaceIsEqual(err, $ifaceNil))) {

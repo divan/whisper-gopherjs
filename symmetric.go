@@ -18,11 +18,11 @@ const (
 
 // EncryptSymmetric encrypts a message with a topic key, using AES-GCM-256.
 // nonce size should be 12 bytes (see cipher.gcmStandardNonceSize).
-func EncryptSymmetric(key []byte, msg string) (string, error) {
-	if !validateDataIntegrity(key, aesKeyLength) {
+func EncryptSymmetric(key string, msg string) (string, error) {
+	if !validateDataIntegrity([]byte(key), aesKeyLength) {
 		return "", errors.New("invalid key provided for symmetric encryption, size: " + strconv.Itoa(len(key)))
 	}
-	block, err := aes.NewCipher(key)
+	block, err := aes.NewCipher([]byte(key))
 	if err != nil {
 		return "", err
 	}
