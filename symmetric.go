@@ -8,15 +8,7 @@ import (
 	"errors"
 	mrand "math/rand"
 	"strconv"
-
-	"github.com/gopherjs/gopherjs/js"
 )
-
-func main() {
-	js.Global.Set("WhisperGo", map[string]interface{}{
-		"EncryptSymmetric": EncryptSymmetric,
-	})
-}
 
 // from whisperv6/doc.go
 const (
