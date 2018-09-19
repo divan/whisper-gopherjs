@@ -29952,7 +29952,7 @@ $packages["golang.org/x/crypto/pbkdf2"] = (function() {
 	return $pkg;
 })();
 $packages["github.com/divan/whisper-gopherjs"] = (function() {
-	var $pkg = {}, $init, aes, cipher, rand, sha256, hex, errors, js, pbkdf2, rand$1, strconv, sliceType, funcType, funcType$1, mapType, Key, main, EncryptSymmetric, validateDataIntegrity, containsOnlyZeros, generateSecureRandomData;
+	var $pkg = {}, $init, aes, cipher, rand, sha256, hex, errors, js, pbkdf2, rand$1, strconv, sliceType, funcType, funcType$1, mapType, Key, KeyEncrypt, main, EncryptSymmetric, validateDataIntegrity, containsOnlyZeros, generateSecureRandomData;
 	aes = $packages["crypto/aes"];
 	cipher = $packages["crypto/cipher"];
 	rand = $packages["crypto/rand"];
@@ -29975,10 +29975,26 @@ $packages["github.com/divan/whisper-gopherjs"] = (function() {
 		/* */ } return; } if ($f === undefined) { $f = { $blk: Key }; } $f._r = _r; $f.password = password; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Key = Key;
+	KeyEncrypt = function(password, msg) {
+		var _r, _r$1, _tuple, err, key, msg, out, password, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; _r$1 = $f._r$1; _tuple = $f._tuple; err = $f.err; key = $f.key; msg = $f.msg; out = $f.out; password = $f.password; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		out = "";
+		err = "";
+		_r = Key(password); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+		key = _r;
+		_r$1 = EncryptSymmetric(key, msg); /* */ $s = 2; case 2: if($c) { $c = false; _r$1 = _r$1.$blk(); } if (_r$1 && _r$1.$blk !== undefined) { break s; }
+		_tuple = _r$1;
+		out = _tuple[0];
+		err = _tuple[1];
+		$s = -1; return [out, err];
+		/* */ } return; } if ($f === undefined) { $f = { $blk: KeyEncrypt }; } $f._r = _r; $f._r$1 = _r$1; $f._tuple = _tuple; $f.err = err; $f.key = key; $f.msg = msg; $f.out = out; $f.password = password; $f.$s = $s; $f.$r = $r; return $f;
+	};
+	$pkg.KeyEncrypt = KeyEncrypt;
 	main = function() {
-		$global.WhisperGo = $externalize($makeMap($String.keyFor, [{ k: "EncryptSymmetric", v: new funcType(EncryptSymmetric) }, { k: "Key", v: new funcType$1(Key) }]), mapType);
+		$global.WhisperGo = $externalize($makeMap($String.keyFor, [{ k: "EncryptSymmetric", v: new funcType(EncryptSymmetric) }, { k: "Key", v: new funcType$1(Key) }, { k: "KeyEncrypt", v: new funcType(KeyEncrypt) }]), mapType);
 		$module.exports.EncryptSymmetric = $externalize(EncryptSymmetric, funcType);
 		$module.exports.Key = $externalize(Key, funcType$1);
+		$module.exports.KeyEncrypt = $externalize(KeyEncrypt, funcType);
 	};
 	EncryptSymmetric = function(key, msg) {
 		var _r, _r$1, _r$2, _r$3, _r$4, _r$5, _r$6, _tuple, _tuple$1, _tuple$2, aesgcm, block, encrypted, err, key, msg, raw, salt, $s, $r;
