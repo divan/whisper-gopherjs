@@ -29965,14 +29965,14 @@ $packages["github.com/divan/whisper-gopherjs"] = (function() {
 	strconv = $packages["strconv"];
 	sliceType = $sliceType($Uint8);
 	funcType = $funcType([sliceType, $String], [$String, $error], false);
-	funcType$1 = $funcType([sliceType, sliceType, $Int, $Int], [sliceType], false);
+	funcType$1 = $funcType([sliceType], [sliceType], false);
 	mapType = $mapType($String, $emptyInterface);
-	Key = function(password, salt, iter, keyLen) {
-		var _r, iter, keyLen, password, salt, $s, $r;
-		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; iter = $f.iter; keyLen = $f.keyLen; password = $f.password; salt = $f.salt; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
-		_r = pbkdf2.Key(password, salt, iter, keyLen, sha256.New); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
+	Key = function(password) {
+		var _r, password, $s, $r;
+		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; password = $f.password; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
+		_r = pbkdf2.Key(password, sliceType.nil, 65356, 32, sha256.New); /* */ $s = 1; case 1: if($c) { $c = false; _r = _r.$blk(); } if (_r && _r.$blk !== undefined) { break s; }
 		$s = -1; return _r;
-		/* */ } return; } if ($f === undefined) { $f = { $blk: Key }; } $f._r = _r; $f.iter = iter; $f.keyLen = keyLen; $f.password = password; $f.salt = salt; $f.$s = $s; $f.$r = $r; return $f;
+		/* */ } return; } if ($f === undefined) { $f = { $blk: Key }; } $f._r = _r; $f.password = password; $f.$s = $s; $f.$r = $r; return $f;
 	};
 	$pkg.Key = Key;
 	main = function() {

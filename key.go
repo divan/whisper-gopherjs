@@ -6,6 +6,6 @@ import (
 	"golang.org/x/crypto/pbkdf2"
 )
 
-func Key(password, salt []byte, iter, keyLen int) []byte {
-	return pbkdf2.Key(password, salt, iter, keyLen, sha256.New)
+func Key(password []byte) []byte {
+	return pbkdf2.Key(password, nil, 65356, aesKeyLength, sha256.New)
 }
