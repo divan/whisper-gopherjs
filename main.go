@@ -1,10 +1,13 @@
 package main
 
-import (
-	"github.com/gopherjs/gopherjs/js"
-)
+import "github.com/gopherjs/gopherjs/js"
 
 func main() {
+	js.Global.Set("WhisperGo", map[string]interface{}{
+		"EncryptSymmetric": EncryptSymmetric,
+		"Key":              Key,
+	})
+
 	js.Module.Get("exports").Set(
 		"EncryptSymmetric", EncryptSymmetric,
 	)

@@ -29952,7 +29952,7 @@ $packages["golang.org/x/crypto/pbkdf2"] = (function() {
 	return $pkg;
 })();
 $packages["github.com/divan/whisper-gopherjs"] = (function() {
-	var $pkg = {}, $init, aes, cipher, rand, sha256, hex, errors, js, pbkdf2, rand$1, strconv, sliceType, funcType, funcType$1, Key, main, EncryptSymmetric, validateDataIntegrity, containsOnlyZeros, generateSecureRandomData;
+	var $pkg = {}, $init, aes, cipher, rand, sha256, hex, errors, js, pbkdf2, rand$1, strconv, sliceType, funcType, funcType$1, mapType, Key, main, EncryptSymmetric, validateDataIntegrity, containsOnlyZeros, generateSecureRandomData;
 	aes = $packages["crypto/aes"];
 	cipher = $packages["crypto/cipher"];
 	rand = $packages["crypto/rand"];
@@ -29966,6 +29966,7 @@ $packages["github.com/divan/whisper-gopherjs"] = (function() {
 	sliceType = $sliceType($Uint8);
 	funcType = $funcType([$String, $String], [$String, $error], false);
 	funcType$1 = $funcType([$String], [$String], false);
+	mapType = $mapType($String, $emptyInterface);
 	Key = function(password) {
 		var _r, password, $s, $r;
 		/* */ $s = 0; var $f, $c = false; if (this !== undefined && this.$blk !== undefined) { $f = this; $c = true; _r = $f._r; password = $f.password; $s = $f.$s; $r = $f.$r; } s: while (true) { switch ($s) { case 0:
@@ -29975,6 +29976,7 @@ $packages["github.com/divan/whisper-gopherjs"] = (function() {
 	};
 	$pkg.Key = Key;
 	main = function() {
+		$global.WhisperGo = $externalize($makeMap($String.keyFor, [{ k: "EncryptSymmetric", v: new funcType(EncryptSymmetric) }, { k: "Key", v: new funcType$1(Key) }]), mapType);
 		$module.exports.EncryptSymmetric = $externalize(EncryptSymmetric, funcType);
 		$module.exports.Key = $externalize(Key, funcType$1);
 	};
